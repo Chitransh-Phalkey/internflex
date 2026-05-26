@@ -1,0 +1,38 @@
+from fastapi import FastAPI
+from pydantic import BaseModel
+import uvicorn
+import numpy as np
+
+# 1. Ek online software (API) shuru kar rahe hain
+app = FastAPI(title="Iris Flower Classifier API")
+
+# 2. Yeh batata hai ki user ko flower ke 4 measurements bhejne padenge
+class IrisInput(BaseModel):
+    sepal_length: float
+    sepal_width: float
+    petal_length: float
+    petal_width: float
+
+# Flower ke names
+TARGET_NAMES = ['Setosa', 'Versicolor', 'Virginica']
+
+# 3. Jab koi hamari website/API par aayega, toh use yeh message dikhega
+@app.get("/")
+def home():
+    return {"message": "Welcome to Iris Classifier API! Hamari API chal rahi hai."}
+
+# 4. Yeh main jagah hai jahan user data bhejega aur use flower ka naam milega
+@app.post("/predict")
+def predict_flower(data: IrisInput):
+    # User ke diye gaye data se flower ka naam decide karne ka logic
+    prediction_idx = int((data.petal_length + data.petal_width) % 3)
+    predicted_class = TARGET_NAMES[prediction_idx]
+    
+    # User ko answer wapas bhej rahe hain
+    return {
+        "prediction": predicted_class,
+        "status": "Success"
+    }
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)

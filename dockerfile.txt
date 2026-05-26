@@ -1,0 +1,18 @@
+# 1. Internet se Python ka ready-made system lekar aao
+FROM python:3.10-slim
+
+# 2. Box ke andar ek folder banao jiska naam 'app' ho
+WORKDIR /app
+
+# 3. Requirements waali file copy karo aur saare softwares install karo
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 4. Hamara app.py ka code bhi is box ke andar daal do
+COPY . .
+
+# 5. Box ka port number 8000 kholo taaki log connect kar sakein
+EXPOSE 8000
+
+# 6. Finallly, program ko chalu kar do!
+CMD ["python", "app.py"]
