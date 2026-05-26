@@ -1,0 +1,42 @@
+# 🚀 Machine Learning & Deep Learning Projects (`internflex`)
+
+Welcome to my project repository! This repository contains hands-on implementations of both Machine Learning and Deep Learning pipelines, completed as part of my technical coursework at SIT Nagpur.
+
+---
+
+## 🌸 Project 1: Iris Flower Classification (Machine Learning)
+A Supervised Classification pipeline to classify Iris flower species based on their sepal and petal measurements.
+
+### 🔹 Key Implementation:
+* **Preprocessing:** Data cleaning with `isnull().sum()` and stratified 80:20 train-test split.
+* **Algorithms Compared:** Logistic Regression & Random Forest Classifier.
+* **Metrics:** Achieved **97% Accuracy, Precision, and Recall** on unseen test data.
+* **Validation:** Verified model stability using 5-Fold Cross-Validation (97% mean accuracy).
+* **Files:** Code available in `untitled0.ipynb`.
+
+---
+
+## 🎬 Project 2: Movie Review Sentiment Analysis (Deep Learning)
+A Binary Text Classification model built using Neural Networks to predict whether a movie review is Positive or Negative.
+
+### 🔹 Key Implementation:
+* **Dataset:** IMDb Movie Reviews Dataset (Top 10,000 frequent words).
+* **NLP Preprocessing:** Applied Tokenization and uniform Post-Padding (`maxlen=250`).
+* **Model Architecture (TensorFlow/Keras):** * `Embedding Layer` (16-dimensional dense vectors)
+  * `GlobalAveragePooling1D` (Data compression)
+  * `Dense Hidden Layer` (16 neurons, ReLU activation)
+  * `Dense Output Layer` (1 neuron, Sigmoid activation)
+* **Visualizations:** Training vs. Validation curves plotted for Loss and Accuracy.
+* **Files:** Code available in `Untitled1.ipynb` and trained model saved as `sentiment_model.h5`.
+
+### 🛠️ How to Run Inference for Project 2:
+To load the trained model and test custom text strings, execute the following snippet:
+```python
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+
+# Load the saved model
+model = load_model('sentiment_model.h5')
+
+# Preprocess, tokenize, and pad your custom text to length 250 before passing to:
+# model.predict(padded_sequence)
